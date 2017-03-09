@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>RMS</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Jquery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<link href="css/jquery.ui.min.css" rel="stylesheet">-->
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Custom styles for dashboard -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <!-- Custom user defined CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="logo">
+            <a href="#"><img src="images/logo2.png" alt="Logo" class="logoImg" /></a>
+          </div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="visible-xs visible-sm"><a href="index.html">Home</a></li>
+            <li class="visible-xs visible-sm"><a href="sites.html">Sites</a></li>
+            <li class="visible-xs visible-sm"><a href="tools.html">Tools</a></li>
+            <li class="visible-xs visible-sm"><a href="users.html">Users</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" id="nav-drop-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user" aria-hidden="true"></i> 
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#userRequestModal" data-toggle="modal" data-target="#userRequestModal">Requests <span class="badge notifyBadge">2</span><i class="fa fa-exclamation-triangle pull-right" aria-hidden="true"></i></a></li>
+                  <li><a href="#profileModal" data-toggle="modal" data-target="#profileModal">Profile <i class="fa fa-user pull-right" aria-hidden="true"></i></a></li>
+                  <li><a href="#">Help <i class="fa fa-question-circle-o pull-right" aria-hidden="true"></i></a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Logout <i class="fa fa-sign-out pull-right"></i></a></li>
+                </ul>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="sites.html">Sites</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="users.html">Users</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Welcome to your Dashboard, <span id="userName">&lt;user_name&gt;</span> </h1>
+          <div class="content">
+            <div class="row placeholders">
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <a href="#" data-toggle="modal" data-target="#addSiteModal">
+                  <span class="fa-stack iconStack" id="stackSite">
+                    <i class="fa fa-circle fa-stack-2x" id="circleBgSite"></i>
+                    <i class="fa fa-industry fa-stack-1x thumbIcon"></i>
+                  </span>
+                </a>
+                <span class="text-muted">
+                  <p class="home-labels">
+                    Add Site Record
+                  </p>
+                </span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <a href="#" data-toggle="modal" data-target="#addToolModal">
+                  <span class="fa-stack iconStack" id="stackTool">
+                    <i class="fa fa-circle fa-stack-2x" id="circleBgTool"></i>
+                    <i class="fa fa-wrench fa-stack-1x thumbIcon"></i>
+                  </span>
+                </a>
+                <span class="text-muted">
+                  <p class="home-labels">
+                    Add Tool Record
+                  </p>
+                </span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <a href="transfer.html">
+                  <span class="fa-stack iconStack" id="stackTransfer">
+                    <i class="fa fa-circle fa-stack-2x" id="circleBgTransfer"></i>
+                    <i class="fa fa-exchange fa-stack-1x thumbIcon"></i>
+                  </span>
+                </a>
+                <span class="text-muted">
+                  <p class="home-labels">
+                    View Transfer Summary
+                  </p>
+                </span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <a href="#" data-toggle="modal" data-target="#dictionaryModal">
+                  <span class="fa-stack iconStack" id="stackDictionary">
+                    <i class="fa fa-circle fa-stack-2x" id="circleBgDictionary"></i>
+                    <i class="fa fa-book fa-stack-1x thumbIcon"></i>
+                  </span>
+                </a>
+                <span class="text-muted">
+                  <p class="home-labels">
+                    Dictionary
+                  </p>
+                </span>
+              </div>
+            </div>
+
+            <h2 class="sub-header">Search</h2>
+            <div class="row search-mobile">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input type="text" name="name" value="" placeholder="Enter name..." class="form-control">
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input type="text" name="desc" value="" placeholder="Enter description..." class="form-control">
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="btn-group-mobile-center">
+                  <div class="btn-group btn-group-mobile" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default active" id="btnSite">Site</button>
+                    <button type="button" class="btn btn-default" id="btnTool">Tool</button>
+                  </div>  
+                </div>
+                
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-12 btn-group-mobile-center">
+                <button type="button" class="btn btn-default btn-search-mobile" name="btnSearch"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+          		<div class="col-md-12">
+          			<div class="panel-group" id="panel-797317">
+          				<div class=""  id="upcAccordian">
+                    <div class="panel panel-default">
+            					<div class="panel-heading">
+            						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-797317" href="#panel-element-58940">
+            						   Upcoming calibration dates
+            						   <span class="badge notifyBadge">2</span>
+            						   </a>
+            					</div>
+            					<div id="panel-element-58940" class="panel-collapse collapse">
+            						<div class="panel-body">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th class="skip-mobile">ID</th>
+                                <th>Tool Name</th>
+                                <th>Site</th>
+                                <th>Calibration Due Date</th>
+                                <th class="skip-mobile"><i class="fa fa-pencil"></i></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="skip-mobile">1</th>
+                                <td>Tool 1</td>
+                                <td>Site 1</td>
+                                <td>25.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="skip-mobile">2</th>
+                                <td>Tool 1</td>
+                                <td>Site 1</td>
+                                <td>25.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="skip-mobile">3</th>
+                                <td>Tool 1</td>
+                                <td>Site 1</td>
+                                <td>25.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+            						</div>
+            					</div>
+            				</div>
+          				</div>
+          				<div class="" id="oodAccordian">
+                    <div class="panel panel-default">
+            					<div class="panel-heading">
+            						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-797317" href="#panel-element-137647">
+            						   Out of date calibrations
+            						   <span class="badge notifyBadge"></span>
+            						   </a>
+            					</div>
+            					<div id="panel-element-137647" class="panel-collapse collapse">
+            						<div class="panel-body">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th class="skip-mobile">ID</th>
+                                <th>Tool Name</th>
+                                <th>Site</th>
+                                <th>Calibration Due Date</th>
+                                <th class="skip-mobile"><i class="fa fa-pencil"></i></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="skip-mobile">1</th>
+                                <td>Tool 2</td>
+                                <td>Site 2</td>
+                                <td>01.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="skip-mobile">2</th>
+                                <td>Tool 2</td>
+                                <td>Site 2</td>
+                                <td>01.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="skip-mobile">3</th>
+                                <td>Tool 2</td>
+                                <td>Site 2</td>
+                                <td>01.03.2017</td>
+                                <td class="skip-mobile">
+                                  <span>
+                                    <a href="javascript:void(0)"><i class="fa fa-eye"></i></a>
+                                  </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+            						</div>
+            					</div>
+            				</div>
+          				</div>
+          			</div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <footer class="footer">
+          <div class="container">
+            <p class="copyright">2016 &copy; sayanrajguha@gmail.com</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+
+<!-- Modals -->
+<!-- Modal Dictionary -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="dictionaryModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">
+              <i class="fa fa-book"></i> &emsp; <span>Dictionary</span>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#toolNames" aria-controls="toolNames" role="tab" data-toggle="tab">Tool Names</a></li>
+                <li role="presentation"><a href="#toolStatus" aria-controls="toolStatus" role="tab" data-toggle="tab">Tool Status</a></li>
+                <li role="presentation"><a href="#toolCategory" aria-controls="toolCategory" role="tab" data-toggle="tab">Tool Category</a></li>
+                <li role="presentation"><a href="#toolGroup" aria-controls="toolGroup" role="tab" data-toggle="tab">Tool Group</a></li>
+                <li role="presentation"><a href="#siteNames" aria-controls="siteNames" role="tab" data-toggle="tab">Site Names</a></li>
+                <li role="presentation"><a href="#siteStatus" aria-controls="siteStatus" role="tab" data-toggle="tab">Site Status</a></li>
+                <li role="presentation"><a href="#siteTypes" aria-controls="siteTypes" role="tab" data-toggle="tab">Site Types</a></li>
+              </ul>
+            </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="toolNames">
+                <div class="row">
+                  <div class="ui-widget">
+                    <input type="text" name="search" id="dictionarySearch" class="form-control" placeholder="Start typing to search for a word" />
+                  </div>
+                </div>
+                <div class="row dictionarySection text-center">
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="newWordName" placeholder="Enter new word...">
+                    </div>
+                    <button type="button" class="btn btn-primary">Add Word</button>
+                  </form>
+                </div>
+                <div class="row">
+                  <div class="displayList">
+                    <div class="" id="dictionaryAccordian">
+                        <div class="panel panel-default">
+                					<div class="panel-heading viewAllHeading">
+                						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-element-999" href="#panel-element-999">
+                						   View All
+                						   <span class="badge notifyBadge"></span>
+                						   </a>
+                					</div>
+                					<div id="panel-element-999" class="panel-collapse collapse">
+                						<div class="panel-body">
+                              <ul class="list-group">
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word1" value="Word 1"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 1
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word2" value="Word 2"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 2
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word3" value="Word 3"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 3
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word4" value="Word 4"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 4
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word5" value="Word 5"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 5
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word6" value="Word 6"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 6
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                                <li class="list-group-item">
+                                  <span class="word-input word-input-toolName">
+                                    <input type="text" class="input-md" name="word7" value="Word 7"/>
+                                  </span>
+                                  <span class="word word-toolName">
+                                    Word 7
+                                  </span>
+                                  <span class="word-mod pull-right">
+                                    <a href="javascript:void(0)" class="word-edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                                  </span>
+                                  <span class="word-store pull-right">
+                                    <a href="javascript:void(0)" class="word-save"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    &nbsp;
+                                    <a href="javascript:void(0)" class="word-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                  </span>
+                                </li>
+                              </ul>
+                						</div>
+                					</div>
+                				</div>
+              				</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="toolStatus">
+                <p>Tool Status</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="toolCategory">
+                <p>Tool Category</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="toolGroup">
+                <p>Tool Group</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="siteNames">
+                <p>Site Names</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="siteStatus">
+                <p>Site Status</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="siteTypes">
+                <p>Site Types</p>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+<!-- Modal Add Site -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="addSiteModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">
+              <i class="fa fa-industry"></i> &emsp; <span>Add Site</span>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-form">
+              <form>
+                <div class="form-group">
+                  <label for="siteName">Site Name</label>
+                  <input type="text" class="form-control" id="siteName" placeholder=" Enter Site Name e.g. NTPC, etc.">
+                </div>
+                <div class="form-group">
+                  <label for="siteAddress">Address</label>
+                  <input type="text" class="form-control" id="siteAddress" placeholder="Enter Site Address e.g. Bokaro, etc.">
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select class="form-control" id="status">
+                    <option>Select Status</option>
+                    <option>Status 1</option>
+                    <option>Status 2</option>
+                    <option>Status 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="type">Type</label>
+                  <select class="form-control" id="type">
+                    <option>Select Type</option>
+                    <option>Type 1</option>
+                    <option>Type 2</option>
+                    <option>Type 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="contact">Contact Person</label>
+                  <input type="text" class="form-control" id="contact" placeholder="Enter Person of contact Details (Name and contact number)">
+                </div>
+            </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+      			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+      				<div class="btn-group" role="group">
+      					<button type="button" id="saveImage" class="btn btn-default" data-action="save" role="button">Save</button>
+      				</div>
+      				<div class="btn-group" role="group">
+      					<button type="button" id="delImage" class="btn btn-default" data-dismiss="modal"  role="button">Cancel</button>
+      				</div>
+      			</div>
+      		</div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+<!-- Modal Add Tool -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="addToolModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">
+              <i class="fa fa-wrench"></i> &emsp; <span>Add Tool</span>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-form">
+              <form>
+                <div class="form-group">
+                  <label for="site">Site</label>
+                  <select class="form-control" id="site">
+                    <option>Select Site</option>
+                    <option>Site 1</option>
+                    <option>Site 2</option>
+                    <option>Site 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="toolID">Tool ID</label>
+                  <input type="text" class="form-control" id="toolID" placeholder=" Enter Tool ID">
+                </div>
+                <div class="form-group">
+                  <label for="toolName">Tool Name</label>
+                  <input type="text" class="form-control" id="toolName" placeholder=" Enter Tool Name e.g. SPANNER, etc.">
+                </div>
+                <div class="form-group">
+                  <label for="range">Range/Size</label>
+                  <input type="text" class="form-control" id="range" placeholder=" Enter Range or Size of Tool">
+                </div>
+                <div class="form-group">
+                  <label for="statusTool">Status</label>
+                  <select class="form-control" id="statusTool">
+                    <option>Select Status</option>
+                    <option>Status 1</option>
+                    <option>Status 2</option>
+                    <option>Status 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="categoryTool">Category</label>
+                  <select class="form-control" id="categoryTool">
+                    <option>Select Category</option>
+                    <option>Category 1</option>
+                    <option>Category 2</option>
+                    <option>Category 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="groupTool">Group</label>
+                  <select class="form-control" id="groupTool">
+                    <option>Select Group</option>
+                    <option>Group 1</option>
+                    <option>Group 2</option>
+                    <option>Group 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="quantity">Quantity</label>
+                  <input type="text" class="form-control" id="quantity" placeholder=" Enter Quantity (use numbers)">
+                </div>
+                <div class="form-group">
+                  <label for="calibID">Calibration ID</label>
+                  <input type="text" class="form-control" id="calibID" placeholder=" Enter Calibration ID">
+                </div>
+                <div class="form-group">
+                  <label for="calibNo">Calibration Test No.</label>
+                  <input type="text" class="form-control" id="calibNo" placeholder=" Enter Calibration Test No.">
+                </div>
+                <div class="form-group">
+                  <label for="calibDate">Calibration Test Date</label>
+                  <input type="text" class="form-control datepicker dateField" id="calibDate" readonly placeholder="Click to select date">
+                </div>
+                <div class="form-group">
+                  <label for="calibValidity">Calibration Test Validity</label>
+                  <input type="text" class="form-control" id="calibValidity" placeholder=" Enter Calibration Validity">
+                </div>
+                <div class="form-group">
+                  <label for="calibAgency">Calibration Test Agency</label>
+                  <input type="text" class="form-control" id="calibAgency" placeholder="Enter Calibration Agency Details">
+                </div>
+                <div class="form-group">
+                  <label for="calibDue">Next Calibration Due Date</label>
+                  <input type="text" class="form-control datepicker dateField" id="calibDue" readonly placeholder="Click to select date">
+                </div>
+            </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+      			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+      				<div class="btn-group" role="group">
+      					<button type="button" id="saveImage" class="btn btn-default" data-action="save" role="button">Save</button>
+      				</div>
+      				<div class="btn-group" role="group">
+      					<button type="button" id="delImage" class="btn btn-default" data-dismiss="modal"  role="button">Cancel</button>
+      				</div>
+      			</div>
+      		</div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="profileModalLabel">My Profile</h4>
+                    </div>
+                <div class="modal-body">
+                    <span class="pull-right">
+                      <a href=""><i class="fa fa-edit fa-2x"></i></a>
+                    </span>
+                    <center>
+                    <i class="fa fa-user fa-5x"></i>
+                    <h3 class="media-heading">Jane Doe <small>(Administrator)</small></h3>
+                    <span class="label label-success">Last login : Oct 31, 2016 11:57:25 PM</span>
+                    </center>
+                    <hr>
+                    <div class="text-left">
+                      <strong><small>Details</small></strong>
+                    </div>
+                    <center>
+                      <div class="profileDetails">
+                                                <p class="row">
+                          <span class="label label-default">
+                              User ID
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            janedoe@peerectors
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              First Name
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            Jane
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Last Name
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            Doe
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Security
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            admin
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Local IP
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            host3.dns2dns.com/103.235.104.87
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Remote Host
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            127.0.0.1
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Remote IP
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            127.0.0.1
+                          </span>
+                        </p>
+                        <p class="row">
+                          <span class="label label-default">
+                              Last logged in
+                          </span> 
+                          &nbsp; 
+                          <span class="label label-warning">
+                            Oct 31, 2016 11:57:25 PM
+                          </span>
+                        </p>
+                      </div>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal User Reset -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="userRequestModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">
+              <i class="fa fa-envelope"></i> &emsp; <span>Requests</span>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-form">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>Message</th>
+                    <th><i class="fa fa-pencil"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Hello</td>
+                    <td>
+                      <span>
+                        <a href="javascript:void(0)"><i class="fa fa-unlock-alt"></i></a>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Hi</td>
+                    <td>
+                      <span>
+                        <a href="javascript:void(0)"><i class="fa fa-unlock-alt"></i></a>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry the Bird</td>
+                    <td>Password Reset</td>
+                    <td>
+                      <span>
+                        <a href="javascript:void(0)"><i class="fa fa-unlock-alt"></i></a>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+<!-- end Modals-->
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="javascript/jquery.min.js"><\/script>')</script>
+    <!-- Jquery UI -->
+    <!--<script type="text/javascript" src="javascript/jquery.ui.min.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="javascript/bootstrap.min.js"></script>
+    <!-- Custom user defined script -->
+    <script src="javascript/script.js"></script>
+  </body>
+</html>
